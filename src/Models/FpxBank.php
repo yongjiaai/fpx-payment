@@ -4,7 +4,7 @@ namespace JagdishJP\FpxPayment\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bank extends Model {
+class FpxBank extends Model {
 
 	public const STATUS_ONLINE = 'Online';
 	public const STATUS_OFFLINE = 'Offline';

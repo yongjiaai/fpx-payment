@@ -3,7 +3,7 @@
 namespace JagdishJP\FpxPayment\Commands;
 
 use JagdishJP\FpxPayment\Messages\BankEnquiry;
-use JagdishJP\FpxPayment\Models\Bank;
+use JagdishJP\FpxPayment\Models\FpxBank;
 use Illuminate\Console\Command;
 
 class UpdateBankListCommand extends Command
@@ -63,7 +63,7 @@ class UpdateBankListCommand extends Command
 					logger("Bank Not Found: ", [$bankId]);
 					continue;
 				}
-				Bank::updateOrCreate(['bank_id' => $bankId], [
+				FpxBank::updateOrCreate(['bank_id' => $bankId], [
 					'status' => $status == 'A' ? 'Online' : 'Offline',
 					'name' => $bank['name'],
 					'short_name' => $bank['short_name']

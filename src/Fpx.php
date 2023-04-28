@@ -5,7 +5,7 @@ namespace JagdishJP\FpxPayment;
 use Exception;
 use JagdishJP\FpxPayment\Messages\AuthEnquiry;
 use JagdishJP\FpxPayment\Messages\BankEnquiry;
-use JagdishJP\FpxPayment\Models\Bank;
+use JagdishJP\FpxPayment\Models\FpxBank;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use JagdishJP\FpxPayment\Exceptions\InvalidCertificateException;
 
@@ -41,7 +41,7 @@ class Fpx
 						continue;
 					}
 
-					Bank::updateOrCreate(['bank_id' => $bankId], [
+					FpxBank::updateOrCreate(['bank_id' => $bankId], [
 						'status' => $status == 'A' ? 'Online' : 'Offline',
 						'name' => $bank['name'],
 						'short_name' => $bank['short_name']
@@ -52,7 +52,7 @@ class Fpx
 			}
 		}
 
-		return Bank::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->pluck('name', 'bank_id');
+		return FpxBank::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)->pluck('name', 'bank_id');
 	}
 
 	/**
